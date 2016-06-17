@@ -1,22 +1,10 @@
+
 'use strict';
 $(document).ready(function() {
-    //Empty contacts array
-    var contacts = [];
 
-    //Initial Object
-    var emptyContact = {
-        first: "",
-        last: "",
-        phone: "",
-        street: "",
-        city: "",
-        state: "",
-        zip: ""
-    }
+//FUNCTIONS
 
-    //FUNCTIONS
     //Adding a contact
-    // var addContact = function() { ... }
     function addContact() {
         console.log("hi")
         var newContact = Object.create(emptyContact);
@@ -31,33 +19,42 @@ $(document).ready(function() {
         console.log(newContact);
         return newContact;
     }
-    //On Click function populates the empty contacts and adds to contact array
-    //Also empty contact list UL and append updated Contacts Array
-    // var conTACT = new.Contact.first + new.Contact.first;
 
-    // always use this when you are listening to a form.
+    //On Click function populates the empty contacts and adds to contact array
     $('form').submit(function(event) {
         event.preventDefault();
         $('.contact-list').empty();
-        addContact();
-        var i;
-        for (i = 0; i < contacts.length; i++) {
-            $('.contact-list').append("<li><a href='#display-area' class='contact-display' onClick='contactDisplay();' id='" + i + "'>" + contacts[i].first + " " + contacts[i].last + "</a></li>");
+        addContact(); 
+        for (var i = 0; i < contacts.length; i++) {
+            $('.contact-list').append("<li><a href='#display-area' class='contact-display' onClick='contactDisplay(" + i + ");'>" + contacts[i].first + " " + contacts[i].last + "</a></li>");
         }
-        console.log('id')
-        console.log(contacts)
-        // add a-link for selecting contacts
-    })
-    // var newContact = this.emptyContact.forEach(function (element) {
+        $('.form-control').val(null);
+    });
 
-    // }
 });
 
 //Click function to select contacts from contact list and display in the contact info session
- function contactDisplay() {
-    console.log(
-        var userAnswer = $('.answer-choices').find('input[name=choices]:checked;').val()
-    // $('.newContact.first').html('First Name:' + this.first);
+function contactDisplay(i) {
+        $("#display-contact").empty();
+        $("#display-contact").append("<li>" + contacts[i].first + " " + contacts[i].last + "</li>");
+        $("#display-contact").append("<li>" + contacts[i].phone + "</li>");
+        $("#display-contact").append("<li>" + contacts[i].street + "</li>");
+        $("#display-contact").append("<li>" + contacts[i].city + "," + " " + contacts[i].state + "</li>");
+        $("#display-contact").append("<li>" + contacts[i].zip + "</li>");
+}
+
+// Variables
+var contacts = []
+var fields = ["first", "last", "phone", "street", "city", "state", "zip"]
+var totalFields = 7
+var emptyContact = {
+    first: "",
+    last: "",
+    phone: "",
+    street: "",
+    city: "",
+    state: "",
+    zip: ""
 }
 
 
@@ -67,5 +64,3 @@ $(document).ready(function() {
 
 
 
-
-//Removes from array and reprints ul
