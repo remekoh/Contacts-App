@@ -18,7 +18,6 @@ $(document).ready(function() {
     //Adding a contact
     // var addContact = function() { ... }
     function addContact() {
-        console.log("hi")
         var newContact = Object.create(emptyContact);
         newContact.first = $("#first-name").val();
         newContact.last = $("#last-name").val();
@@ -28,37 +27,35 @@ $(document).ready(function() {
         newContact.state = $("#state").val();
         newContact.zip = $("#zipcode").val();
         contacts.push(newContact);
-        console.log(newContact);
-        return newContact;
-    }
-    //On Click function populates the empty contacts and adds to contact array
-    //Also empty contact list UL and append updated Contacts Array
-    // var conTACT = new.Contact.first + new.Contact.first;
-
-    // always use this when you are listening to a form.
-    $('form').submit(function(event) {
-        event.preventDefault();
-        $('.contact-list').empty();
-        addContact();
-        var i;
-        for (i = 0; i < contacts.length; i++) {
-            $('.contact-list').append("<li><a href='#display-area' class='contact-display' onClick='contactDisplay();' id='" + i + "'>" + contacts[i].first + " " + contacts[i].last + "</a></li>");
+        //Variable to hold first and last name
+        var contactInfo = newContact.first + " " + newContact.last;
+        //function to display (full info) property to added object
+        newContactDisplay = function () {
+            $('.first-last').html(contactInfo);
+            $('.first').html('First Name: ' + this.first);
+            $('.last').html('Last Name: ' + this.last);
+            $('.phone').html('Phone Number: ' + this.phone);
+            $('.address').html('Address: ' + '<ul><li>' + this.street + ", " + this.city + ", " + this.state + '</ul></li>');
         }
-        console.log('id')
-        console.log(contacts)
-        // add a-link for selecting contacts
+        //calling the display function inside the addContact function
+        contactDisplay(contactInfo, function() {
+            //passing this to the specific contact being added
+            newContactDisplay();
+        });
+        $('#form')[0].reset();
+    } //addContact End
+
+    function contactDisplay(contactInfo, clickHandler) {
+        var aTag = $("<li> <a class='hrefLink' href='#display-area'>" + contactInfo + "</a> </li>").click(clickHandler);
+        $('.contact-list').append(aTag)
+    }
+
+    $('#form').submit(function(event) {
+        event.preventDefault();
+        addContact();
     })
-    // var newContact = this.emptyContact.forEach(function (element) {
 
-    // }
-});
-
-//Click function to select contacts from contact list and display in the contact info session
- function contactDisplay() {
-    console.log(
-        var userAnswer = $('.answer-choices').find('input[name=choices]:checked;').val()
-    // $('.newContact.first').html('First Name:' + this.first);
-}
+}); // document ready close
 
 
 
