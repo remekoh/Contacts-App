@@ -5,32 +5,31 @@ $(document).ready(function() {
 
     //Initial Object
     var emptyContact = {
-        first: "",
-        last: "",
-        phone: "",
-        street: "",
-        city: "",
-        state: "",
-        zip: ""
+        first: 'Brad',
+        last: 'Pitt',
+        phone: '3105550000',
+        street: '123 Main Street',
+        city: 'Beverly Hills',
+        state: 'CA',
+        zip: '90210'
     }
 
     //FUNCTIONS
     //Adding a contact
-    // var addContact = function() { ... }
     function addContact() {
         var newContact = Object.create(emptyContact);
-        newContact.first = $("#first-name").val();
-        newContact.last = $("#last-name").val();
-        newContact.phone = $("#phone-number").val();
-        newContact.street = $("#street").val();
-        newContact.city = $("#city").val();
-        newContact.state = $("#state").val();
-        newContact.zip = $("#zipcode").val();
+        newContact.first = $('#first-name').val();
+        newContact.last = $('#last-name').val();
+        newContact.phone = $('#phone-number').val();
+        newContact.street = $('#street').val();
+        newContact.city = $('#city').val();
+        newContact.state = $('#state').val();
+        newContact.zip = $('#zipcode').val();
         contacts.push(newContact);
         //Variable to hold first and last name
         var contactInfo = newContact.first + " " + newContact.last;
         //function to display (full info) property to added object
-        newContactDisplay = function () {
+        newContact.display = function() {
             $('.first-last').html(contactInfo);
             $('.first').html('First Name: ' + this.first);
             $('.last').html('Last Name: ' + this.last);
@@ -40,13 +39,13 @@ $(document).ready(function() {
         //calling the display function inside the addContact function
         contactDisplay(contactInfo, function() {
             //passing this to the specific contact being added
-            newContactDisplay();
+            newContact.display();
         });
         $('#form')[0].reset();
     } //addContact End
 
     function contactDisplay(contactInfo, clickHandler) {
-        var aTag = $("<li> <a class='hrefLink' href='#display-area'>" + contactInfo + "</a> </li>").click(clickHandler);
+        var aTag = $("<li> <a class='link' href='#display-area'>" + contactInfo + "</a> </li>").click(clickHandler);
         $('.contact-list').append(aTag)
     }
 
@@ -56,13 +55,3 @@ $(document).ready(function() {
     })
 
 }); // document ready close
-
-
-
-
-
-
-
-
-
-//Removes from array and reprints ul

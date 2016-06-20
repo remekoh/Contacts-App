@@ -1,0 +1,16 @@
+body {
+	font-family: 'Lato', sans-serif;
+}
+
+h1 {
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+h1, h3, h5 {
+
+}
+
+#display-area > ul {
+	list-style-type: none;
+}
